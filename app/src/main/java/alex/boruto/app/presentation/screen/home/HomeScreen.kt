@@ -4,7 +4,8 @@ package alex.boruto.app.presentation.screen.home
 
 import alex.boruto.app.navigation.Screen
 import alex.boruto.app.presentation.common.ListContent
-import androidx.compose.material.Scaffold
+import alex.boruto.app.ui.theme.welcomeScreenBackgroundColor
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -22,12 +23,14 @@ fun HomeScreen(
             HomeTopBar(onSearchClicked = {
                 navController.navigate(Screen.Search.route)
             })
+        },
+        containerColor = welcomeScreenBackgroundColor,
+        content = { innerPadding ->
+            ListContent(
+                padding = innerPadding,
+                heroes = allHeroes,
+                navController = navController
+            )
         }
-    ) { innerPadding ->
-        ListContent(
-            padding = innerPadding,
-            heroes = allHeroes,
-            navController = navController
-        )
-    }
+    )
 }

@@ -3,10 +3,15 @@ package alex.boruto.app.presentation.screen.welcome
 import alex.boruto.app.R
 import alex.boruto.app.domain.model.OnboardingPage
 import alex.boruto.app.navigation.Screen
+import alex.boruto.app.presentation.components.HorizontalPagerIndicator
 import alex.boruto.app.ui.theme.EXTRA_LARGE_PADDING
+import alex.boruto.app.ui.theme.PAGING_INDICATOR_SPACING
+import alex.boruto.app.ui.theme.PAGING_INDICATOR_WIDTH
 import alex.boruto.app.ui.theme.SMALL_PADDING
+import alex.boruto.app.ui.theme.activeIndicatorColor
 import alex.boruto.app.ui.theme.buttonBackgroundColor
 import alex.boruto.app.ui.theme.descriptionColor
+import alex.boruto.app.ui.theme.inactiveIndicatorColor
 import alex.boruto.app.ui.theme.titleColor
 import alex.boruto.app.ui.theme.welcomeScreenBackgroundColor
 import alex.boruto.app.util.Constants.LAST_ON_BOARDING_PAGE
@@ -14,21 +19,15 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -36,14 +35,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 
@@ -67,13 +64,23 @@ fun WelcomeScreen(
             .background(color = welcomeScreenBackgroundColor)
     ) {
         HorizontalPager(
+            modifier = Modifier.weight(10f),
             state = pagerState,
-            verticalAlignment = Alignment.Top,
+            verticalAlignment = Alignment.Top
         ) { position ->
             PagerScreen(onBoardingPage = pages[position])
         }
-        Spacer(modifier = Modifier.height(24.dp))
-        HorizontalPagerIndicator(pagerState)
+        HorizontalPagerIndicator(
+            modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterHorizontally),
+            pagerState = pagerState,
+            pageCount = pagerState.pageCount,
+            activeColor = activeIndicatorColor,
+            inactiveColor = inactiveIndicatorColor,
+            indicatorWidth = PAGING_INDICATOR_WIDTH,
+            spacing = PAGING_INDICATOR_SPACING
+        )
         FinishButton(
             modifier = Modifier.weight(1f),
             pagerState = pagerState
@@ -81,30 +88,6 @@ fun WelcomeScreen(
             navController.popBackStack()
             navController.navigate(Screen.Home.route)
             welcomeViewModel.saveOnBoardingState(completed = true)
-        }
-    }
-}
-
-@Composable
-private fun HorizontalPagerIndicator(pagerState: PagerState) {
-    Row(
-        Modifier
-            .wrapContentHeight()
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        repeat(pagerState.pageCount) { iteration ->
-            val color =
-                if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
-            Box(
-                modifier = Modifier
-                    .padding(2.dp)
-                    .clip(CircleShape)
-                    .background(color)
-                    .size(16.dp)
-            )
         }
     }
 }
