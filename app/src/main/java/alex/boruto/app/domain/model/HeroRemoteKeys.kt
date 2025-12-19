@@ -1,13 +1,14 @@
 package alex.boruto.app.domain.model
 
-import alex.boruto.app.util.Constants.HERO_REMOTE_KEY_DATABASE_TABLE
+import alex.boruto.app.util.Constants
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = HERO_REMOTE_KEY_DATABASE_TABLE)
-data class HeroRemoteKey(
+@Entity(tableName = Constants.HERO_REMOTE_KEYS_DATABASE_TABLE)
+data class HeroRemoteKeys(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val previousPage: Int?,
-    val nextPage: Int?
+    val nextPage: Int?,
+    val lastUpdated : Long?
 )

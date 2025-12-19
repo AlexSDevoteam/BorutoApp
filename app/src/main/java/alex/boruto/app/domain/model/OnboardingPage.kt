@@ -3,25 +3,25 @@ package alex.boruto.app.domain.model
 import alex.boruto.app.R
 import androidx.annotation.DrawableRes
 
-sealed class OnBoardingPage(
+sealed class OnboardingPage(
     @DrawableRes
     val image: Int,
     val title: String,
     val description: String,
 ) {
-    object Greetings : OnBoardingPage(
+    object Greetings : OnboardingPage(
         image = R.drawable.greetings,
         title = "Greetings",
         description = "Are you a Boruto fan? Because if you are then we have a great news for you!"
     )
 
-    object Explore : OnBoardingPage(
+    object Explore : OnboardingPage(
         image = R.drawable.explore,
         title = "Explore",
         description = "Find your favorite heroes and learn some of the things that you didn't know about."
     )
 
-    object Power : OnBoardingPage(
+    object Power : OnboardingPage(
         image = R.drawable.power,
         title = "Power",
         description = "Check out your hero's power and  see how much are they strong comparing to others."

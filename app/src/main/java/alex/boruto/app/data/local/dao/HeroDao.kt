@@ -14,10 +14,10 @@ interface HeroDao {
     fun getAllHeroes(): PagingSource<Int, Hero>
 
     @Query("SELECT * FROM hero_table WHERE id = :heroId")
-    fun getHeroByName(heroId: Int): Hero
+    fun getHeroById(heroId: Int): Hero
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addHeroes(heroes: List<Hero>)
+    suspend fun addHeroes(heroEntities: List<Hero>)
 
     @Query("DELETE FROM hero_table")
     suspend fun deleteAllHeroes()

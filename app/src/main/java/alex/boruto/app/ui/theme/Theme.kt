@@ -1,6 +1,5 @@
 package alex.boruto.app.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -14,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = Purple200,
     onPrimary = Purple700,
-    secondary = Teal200
+    secondary = Teal200,
 )
 
 private val LightColorScheme = lightColorScheme(

@@ -1,4 +1,4 @@
-package alex.boruto.app.data.preferences
+package alex.boruto.app.data.local.preferences
 
 import alex.boruto.app.domain.repository.DataStoreOperations
 import alex.boruto.app.util.Constants.PREFERENCES_KEY

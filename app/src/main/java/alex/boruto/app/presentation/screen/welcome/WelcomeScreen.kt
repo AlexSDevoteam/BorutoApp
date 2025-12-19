@@ -1,7 +1,7 @@
 package alex.boruto.app.presentation.screen.welcome
 
 import alex.boruto.app.R
-import alex.boruto.app.domain.model.OnBoardingPage
+import alex.boruto.app.domain.model.OnboardingPage
 import alex.boruto.app.navigation.Screen
 import alex.boruto.app.ui.theme.EXTRA_LARGE_PADDING
 import alex.boruto.app.ui.theme.SMALL_PADDING
@@ -53,9 +53,9 @@ fun WelcomeScreen(
     welcomeViewModel: WelcomeViewModel = hiltViewModel()
 ) {
     val pages = listOf(
-        OnBoardingPage.Greetings,
-        OnBoardingPage.Explore,
-        OnBoardingPage.Power,
+        OnboardingPage.Greetings,
+        OnboardingPage.Explore,
+        OnboardingPage.Power,
     )
     val pagerState = rememberPagerState {
         pages.size
@@ -64,7 +64,7 @@ fun WelcomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.welcomeScreenBackgroundColor)
+            .background(color = welcomeScreenBackgroundColor)
     ) {
         HorizontalPager(
             state = pagerState,
@@ -128,7 +128,7 @@ fun FinishButton(
             Button(
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MaterialTheme.colors.buttonBackgroundColor,
+                    backgroundColor = buttonBackgroundColor,
                     contentColor = Color.White
                 )
             ) {
@@ -139,7 +139,7 @@ fun FinishButton(
 }
 
 @Composable
-fun PagerScreen(onBoardingPage: OnBoardingPage) {
+fun PagerScreen(onBoardingPage: OnboardingPage) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -157,7 +157,7 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
             modifier = Modifier
                 .fillMaxWidth(),
             text = onBoardingPage.title,
-            color = MaterialTheme.colors.titleColor,
+            color = titleColor,
             fontSize = MaterialTheme.typography.h4.fontSize,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
@@ -168,7 +168,7 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
                 .padding(horizontal = EXTRA_LARGE_PADDING)
                 .padding(top = SMALL_PADDING),
             text = onBoardingPage.description,
-            color = MaterialTheme.colors.descriptionColor,
+            color = descriptionColor,
             fontSize = MaterialTheme.typography.subtitle1.fontSize,
             fontWeight = FontWeight.Medium,
             textAlign = TextAlign.Center
@@ -180,7 +180,7 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
 @Preview(showBackground = true)
 fun FirstOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.Greetings)
+        PagerScreen(onBoardingPage = OnboardingPage.Greetings)
     }
 }
 
@@ -188,7 +188,7 @@ fun FirstOnBoardingScreenPreview() {
 @Preview(showBackground = true)
 fun SecondOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.Explore)
+        PagerScreen(onBoardingPage = OnboardingPage.Explore)
     }
 }
 
@@ -196,6 +196,6 @@ fun SecondOnBoardingScreenPreview() {
 @Preview(showBackground = true)
 fun ThirdOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
-        PagerScreen(onBoardingPage = OnBoardingPage.Power)
+        PagerScreen(onBoardingPage = OnboardingPage.Power)
     }
 }
